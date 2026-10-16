@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity//Esta classe representa uma entidade do banco de dados, ou seja, uma tabela
 public class Colaborador {
@@ -16,8 +18,13 @@ public class Colaborador {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //geração automática do id
     private Long id;
 
+    @NotBlank(message = "O nome e obrigatorio") //nao pode ser vazio nem so espacos
     private String nome;
+
+    @NotBlank(message = "O cargo e obrigatorio")
     private String cargo;
+
+    @NotNull(message = "A data de admissao e obrigatoria") //nao pode faltar
     private LocalDate dataAdmissao;//so a data, sem hora
 
     @ManyToOne //muitos colaboradores para um departamento

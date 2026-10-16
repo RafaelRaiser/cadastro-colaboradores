@@ -2,6 +2,8 @@ package com.rafael.colaboradores.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,14 +47,14 @@ public class ColaboradorController {
 
     // POST /api/colaboradores  (os dados vem no corpo, em JSON)
     @PostMapping
-    public ResponseEntity<Colaborador> criar(@RequestBody Colaborador colaborador) {
+    public ResponseEntity<Colaborador> criar(@Valid @RequestBody Colaborador colaborador) {
         Colaborador salvo = service.salvar(colaborador);
         return ResponseEntity.status(HttpStatus.CREATED).body(salvo); // 201
     }
 
     // PUT /api/colaboradores/1
     @PutMapping("/{id}")
-    public Colaborador atualizar(@PathVariable Long id, @RequestBody Colaborador colaborador) {
+    public Colaborador atualizar(@PathVariable Long id, @Valid @RequestBody Colaborador colaborador) {
         return service.atualizar(id, colaborador);
     }
 
