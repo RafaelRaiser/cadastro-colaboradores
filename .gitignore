@@ -9,3 +9,6 @@ target/
 dados/
 *.log
 .DS_Store
+
+# anotacoes pessoais de estudo
+ESTUDO.md
