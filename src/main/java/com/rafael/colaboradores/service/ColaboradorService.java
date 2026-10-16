@@ -26,7 +26,8 @@ public List<Colaborador> listar(){
     return colaboradorRepository.findAll();
 }
 
-public Colaborador buscarPorId(Long id){    return colaboradorRepository.findById(id)
+public Colaborador buscarPorId(Long id){
+    return colaboradorRepository.findById(id)
             .orElseThrow(() -> new RecursoNaoEncontradoException("Colaborador não encontrado com id: " + id));
 }
 
@@ -50,7 +51,7 @@ public Colaborador salvar(Colaborador colaborador){
         aplicarDepartamento(existente);
         return colaboradorRepository.save(existente);
     }
-   public void excluir(long id){
+   public void excluir(Long id){
     
        Colaborador existente = buscarPorId(id); // se nao existir, ja da erro aqui
        colaboradorRepository.delete(existente);
@@ -66,5 +67,6 @@ public Colaborador salvar(Colaborador colaborador){
         } 
 
         Departamento real = departamentoRepository.findById(informado.getId()).orElseThrow(() -> new RecursoNaoEncontradoException("Departamento nao encontrado com o id " + informado.getId()));
+        colaborador.setDepartamento(real); // troca o departamento "so com id" pelo completo do banco
     }
 }
